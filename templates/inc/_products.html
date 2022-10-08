@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-3">
+    {% for product in product_list %}
+        <div class="col">
+            <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
+                <div class="card shadow border-secondary border-2 h-100">
+                    <div class="h-250">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="card-img-top p-1" alt="image">
+                        {% else %}
+                            <img src="{% static 'plankiHomePage/images/photo_not_found.png' %}"
+                                 class="card-img-top"
+                                 alt="image">
+                        {% endif %}
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="mb-2 card-title fw-light">{{ product.name }}</h5>
+                        <h5 class="mb-2 card-text">{{ product.price|floatformat }}₽</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>

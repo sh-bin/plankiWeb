@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Авторизация :: {{ block.super }}{% endblock %}
+{% block content %}
+    <h1>Авторизация</h1>
+
+
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="form-group mb-3">
+                <p class="mb-1">{{ field.label_tag }}</p>
+                <p>{{ field }}</p>
+                <p>{{ field.errors }}</p>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-block">Авторизоваться</button>
+    </form>
+{% endblock %}

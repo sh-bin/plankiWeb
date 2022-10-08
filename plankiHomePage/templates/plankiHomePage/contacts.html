@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Контакты :: {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class ="text-center">
+    <h1 class="mb-3 text-center fw-light">Контакты</h1>
+
+    <div class="m-auto bg-warning shadow rounded-3" style="width: 18rem;">
+        <h5>Адрес:</h5>
+        <p>г.Москва, ул.Фрунзенская набережная д30/2</p>
+    </div>
+
+    <hr class="dropdown-divider">
+
+    <div class="m-auto bg-warning shadow rounded-3" style="width: 18rem;">
+        <h5>Режим работы:</h5>
+        <p>Пн-Сб: с 10:00-20:00<br>Вс: Выходной</p>
+    </div>
+    <hr class="dropdown-divider">
+
+    <div class="m-auto bg-warning shadow rounded-3"  style="width: 18rem;">
+        <h5>Телефон:</h5>
+        <p>8-499-391-00-43</p>
+    </div>
+    <hr class="dropdown-divider">
+
+    <div class="m-auto bg-warning shadow rounded-3" style="width: 18rem;">
+        <h5>Email:</h5>
+        <p>planki.moskva@mail.ru</p>
+    </div>
+    <hr class="dropdown-divider">
+
+    <div class="m-auto bg-warning shadow rounded-3" style="width: 18rem;">
+        <h5>Мобильный:</h5>
+        <p>8-965-296-09-09</p>
+    </div>
+ </div>
+{% endblock %}

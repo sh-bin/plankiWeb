@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Обратная связь :: {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center fw-light">Обратная связь</h1>
+    <p class="mb-1 text-center">Если Вас заинтересовала деятельность нашего предприятия, возникли вопросы или пожелания,
+        предлагаем Вам заполнить данную форму.</p>
+    <p class="text-muted text-center">⃰ Поля обязательные для заполнения.</p>
+
+    <form action="{% url 'plankiHomePage:feedback' %}" method="post">
+
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div>
+                <p>{{ field }}</p>
+                <p>{{ field.errors }}</p>
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-warning btn-block container-fluid">Отправить</button>
+    </form>
+{% endblock %}

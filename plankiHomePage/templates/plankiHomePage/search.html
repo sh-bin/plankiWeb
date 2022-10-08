@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <h1 class="mb-3 text-center fw-light">Результат поиска "{{ q }}"</h1>
+
+    {# products #}
+    {% include "inc/_products.html" with product_list=page_obj.object_list %}
+
+    {# paginator #}
+    {% include 'inc/_paginator.html' %}
+{% endblock %}

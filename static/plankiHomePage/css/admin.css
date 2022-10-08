@@ -1,0 +1,22 @@
+body {
+    font-size: 15px;
+    font-family: "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", Verdana, Arial, Roboto, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", default;
+}
+
+#header {
+    background: #212121;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: #212121;
+}
+
+div.breadcrumbs {
+    background: #424242;
+    color: var(--breadcrumbs-fg);
+}
+
+a:link, a:visited {
+    color: #212121;
+}

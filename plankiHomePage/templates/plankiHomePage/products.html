@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Товар :: {{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <div class="row row-cols-sm-1 mt-4">
+
+        {# catalogue #}
+        {% if categories %}
+            <div class="col-12 col-md-3">
+                <div class="list-group mb-2 shadow">
+                    <li class="list-group-item text-white bg-dark bg-opacity-75" style="text-align: center">
+                        <h6 class="mb-0 fw-light">Каталог Орденских Планок</h6>
+                    </li>
+
+                    {% for category in categories %}
+                        <a class="fw-light list-group-item list-group-item-action {% if category.name == current_category %}bg-secondary text-white{% endif %}"
+                           href="{{ category.get_absolute_url }}">
+                            {{ category.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {# products #}
+        <div class="{% if categories %} col-12 col-md-9 {% else %} col-12 {% endif %}">
+            {# current category block #}
+            <div>
+                <h2 class="fw-light">{% if categories %} {{ current_category }} {% else %}
+                    {{ titleForCatalogue }} {% endif %}</h2>
+                <hr>
+            </div>
+
+            {# products #}
+            {% include "inc/_products.html" with product_list=page_obj.object_list %}
+        </div>
+
+        {# paginator #}
+        {% include "inc/_paginator.html" %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Настройки :: {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div>
+        <h1 class="text-center fw-light mb-4">Настройки</h1>
+
+        <h2 class="fw-light">Основные</h2>
+        <hr>
+
+        <form class="mb-4" method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="row">
+                {% for field in form %}
+                    <div class="col-12 col-sm-6">
+                        <p class="mb-1">{{ field.label_tag }}</p>
+                        <p>{{ field }}</p>
+                        <p>{{ field.errors }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="d-grid gap-2 col-md-6 mx-auto">
+                <button type="submit" class="btn btn-warning btn-block  container-fluid">Сохранить</button>
+            </div>
+        </form>
+
+        <h2 class="fw-light">Смена пароля</h2>
+        <hr>
+
+        <a href="{% url 'plankiHomePage:change_password' %}" class="link-dark ">Кликните по этой ссылке для сменны пароля</a>
+
+{#        <form action="{% url 'plankiHomePage:change_password' %}" method="get">#}
+{#            <div class="d-grid gap-2 col-md-6 mx-auto">#}
+{#                <button type="submit" class="btn btn-warning">Сменить пароль</button>#}
+{#            </div>#}
+{#        </form>#}
+
+    </div>
+{% endblock %}
