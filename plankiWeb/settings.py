@@ -66,9 +66,9 @@ WSGI_APPLICATION = 'plankiWeb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'planki_db',
-        'USER': 'planki_admin',
-        'PASSWORD': 'Forever_beFirst1!',
+        'NAME': 'plankidb',
+        'USER': 'plankiadmin',
+        'PASSWORD': '0909',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     },

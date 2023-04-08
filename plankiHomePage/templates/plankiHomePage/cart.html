@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Корзина :: {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2 class="fw-light">Корзина</h1>
+    <hr>
+    <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>
+ {% endblock %}

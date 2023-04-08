@@ -10,6 +10,9 @@ urlpatterns = [
     # url for home page
     path('', include('plankiHomePage.urls')),
 ]
+
 if settings.DEBUG:
-    urlpatterns += path('__debug__/', include('debug_toolbar.urls')),  # For 'Debug Toolbar'
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # For 'Debug Toolbar'
+    urlpatterns += path('__debug__/', include('debug_toolbar.urls')),
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

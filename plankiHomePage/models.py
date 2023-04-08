@@ -57,10 +57,10 @@ class CategorySlats(models.Model):
 
 
 class Slats(models.Model):
+    category = models.ForeignKey('CategorySlats', on_delete=models.PROTECT, verbose_name='Категория')
     name = models.CharField(max_length=170, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=170, unique=True, verbose_name='Слаг')
     description = models.TextField(max_length=300, verbose_name='Описание')
-    category = models.ForeignKey('CategorySlats', on_delete=models.PROTECT, verbose_name='Категория')
     image = models.ImageField(upload_to='plankiHomePage/images/slats/%Y/%m/%d', blank=True, verbose_name='Фото')
     stock = models.PositiveIntegerField(verbose_name='Остаток продукта')
     available = models.BooleanField(default=True, verbose_name='Наличие')
@@ -77,47 +77,3 @@ class Slats(models.Model):
 
     def get_absolute_url(self):
         return reverse('plankiHomePage:detail_slats', kwargs={'slug_id': self.slug})
-
-
-class Sashes(models.Model):
-    name = models.CharField(max_length=170, db_index=True, verbose_name='Название')
-    slug = models.SlugField(max_length=170, unique=True, verbose_name='Слаг')
-    description = models.TextField(max_length=300, verbose_name='Описание')
-    image = models.ImageField(upload_to='plankiHomePage/images/sashes/%Y/%m/%d', blank=True, verbose_name='Фото')
-    stock = models.PositiveIntegerField(verbose_name='Остаток продукта')
-    available = models.BooleanField(default=True, verbose_name='Наличие')
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
-    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Лента'
-        verbose_name_plural = 'Ленты'
-        ordering = ['time_create', 'name']
-
-    def get_absolute_url(self):
-        return reverse('plankiHomePage:detail_sashes', kwargs={'slug_id': self.slug})
-
-
-class Jettons(models.Model):
-    name = models.CharField(max_length=170, db_index=True, verbose_name='Название')
-    slug = models.SlugField(max_length=170, unique=True, verbose_name='Слаг')
-    description = models.TextField(max_length=300, verbose_name='Описание')
-    image = models.ImageField(upload_to='plankiHomePage/images/jettons/%Y/%m/%d', blank=True, verbose_name='Фото')
-    stock = models.PositiveIntegerField(verbose_name='Остаток продукта')
-    available = models.BooleanField(default=True, verbose_name='Наличие')
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
-    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Жетон'
-        verbose_name_plural = 'Жетоны'
-        ordering = ['time_create', 'name']
-
-    def get_absolute_url(self):
-        return reverse('plankiHomePage:detail_jettons', kwargs={'slug_id': self.slug})

@@ -4,52 +4,48 @@
 {% block title %}Подробнее :: {{ block.super }}{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-4 align-self-center">
-            {% if product.image %}
-                <div class="mb-3 text-center">
-                    <img src="{{ product.image.url }}" width=100% height=100% class="rounded" alt="Image here">
-                </div>
-            {% else %}
-                <div class="mb-3">
-                    <img src="{% static 'plankiHomePage/images/photo_not_found.png' %}"
-                         class="rounded border border-1 border-dark" alt="Image here">
-                </div>
-            {% endif %}
+<div class="row">
+    <div class="col-4 align-self-center">
+        {% if product.image %}
+        <div class="mb-3 text-center">
+            <img src="{{ product.image.url }}" width=100% height=100% class="rounded" alt="Image here">
         </div>
-
-        <div class="col align-self-start">
-            <h3 class="mb-1 fw-light">{{ product.name }}</h3>
-            {% if product.category %}
-                <p class="mb-0 fw-light text-muted">Категория: {{ product.category }}</p>
-            {% endif %}
-            <p class="mb-2 fw-light text-muted">В наличии: {{ product.stock }} шт.</p>
-            <h4 class="">{{ product.price|floatformat }}₽</h4>
+        {% else %}
+        <div class="mb-3">
+            <img src="{% static 'plankiHomePage/images/photo_not_found.png' %}"
+                class="rounded border border-1 border-dark" alt="Image here">
         </div>
+        {% endif %}
     </div>
 
-    <!--tabs-->
-    <nav class="mt-4">
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab"
-                    data-bs-target="#nav-description"
-                    type="button"
-                    role="tab" aria-controls="nav-description" aria-selected="true">Описание
-            </button>
-            <button class="nav-link" id="nav-reviews-tab" data-bs-toggle="tab" data-bs-target="#nav-reviews"
-                    type="button"
-                    role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы
-            </button>
-        </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-        <div class="mt-1 tab-pane fade show active" id="nav-description"
-             role="tabpanel" aria-labelledby="nav-description-tab">{{ product.description }}
-        </div>
-
-        <div class="mt-1 tab-pane fade" id="nav-reviews"
-             role="tabpanel" aria-labelledby="nav-reviews-tab">Отзывы
-        </div>
+    <div class="col align-self-start">
+        <h3 class="mb-1 fw-light">{{ product.name }}</h3>
+        {% if product.category %}
+        <p class="mb-0 fw-light text-muted">Категория: {{ product.category }}</p>
+        {% endif %}
+        <p class="mb-2 fw-light text-muted">В наличии: {{ product.stock }} шт.</p>
+        <h4 class="">{{ product.price|floatformat }}₽</h4>
     </div>
+</div>
+
+<!--tabs-->
+<nav class="mt-4">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description"
+            type="button" role="tab" aria-controls="nav-description" aria-selected="true">Описание
+        </button>
+        <button class="nav-link" id="nav-reviews-tab" data-bs-toggle="tab" data-bs-target="#nav-reviews" type="button"
+            role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы
+        </button>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="mt-1 tab-pane fade show active" id="nav-description" role="tabpanel"
+        aria-labelledby="nav-description-tab">{{ product.description }}
+    </div>
+
+    <div class="mt-1 tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">Отзывы
+    </div>
+</div>
 
 {% endblock %}

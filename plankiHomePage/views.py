@@ -8,16 +8,26 @@ from django.contrib import messages
 from .forms import CustomUserCreationForm, UserLoginForm
 from django.contrib.auth import login, logout, update_session_auth_hash
 from itertools import chain
+from django.http import HttpResponse, JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def sendCart(request):
+    if request.method == 'POST':
+        data_dict = json.loads(request.body)
+        print(data_dict)
+        return JsonResponse({"success": "Done"})
+    else:
+        return JsonResponse({"error": "Rong"})
 
 
-# Main
 def index(request):
-    slats = Slats.objects.filter(available=True, category__name='Ордена России')[:6]
-    jettons = Jettons.objects.filter(available=True)[:6]
+    slats = Slats.objects.filter(
+        available=True, category__name='Ордена России')[:6]
 
     context = {
         'slats': slats,
-        'jettons': jettons
     }
     return render(request, 'plankiHomePage/index.html', context=context)
 
@@ -140,14 +150,18 @@ def settings(request):
 # Search
 def search(request):
     q = request.GET.get('q')
+
     if q == None:
         q = 'Орден'
     elif q == "":
         q = 'Орден'
-    slats = Slats.objects.filter(Q(name__icontains=q) | Q(description__icontains=q), Q(available=True))
-    sashes = Sashes.objects.filter(Q(name__icontains=q) | Q(description__icontains=q), Q(available=True))
-    jettons = Jettons.objects.filter(Q(name__icontains=q) | Q(description__icontains=q), Q(available=True))
-    products = sorted(chain(slats, sashes, jettons), key=lambda instance: instance.name)
+    slats = Slats.objects.filter(Q(name__icontains=q) | Q(
+        description__icontains=q), Q(available=True))
+
+    # products = sorted(chain(slats, sashes, jettons),
+    #                   key=lambda instance: instance.name)
+
+    products = slats
     paginator = Paginator(products, 15)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
@@ -163,7 +177,8 @@ def search(request):
 def slats(request, slug_id):
     categories = CategorySlats.objects.annotate(cnt=Count('slats', filter=F('slats__available'))).filter(
         cnt__gt=0).order_by('time_create')
-    products = Slats.objects.filter(category__slug=slug_id, available=True).order_by('-time_create')
+    products = Slats.objects.filter(
+        category__slug=slug_id, available=True).order_by('-time_create')
     current_category = CategorySlats.objects.get(slug=slug_id).name
     paginator = Paginator(products, 15)
     page_num = request.GET.get('page', 1)
@@ -209,7 +224,7 @@ def detail_slats(request, slug_id):
     product = get_object_or_404(Slats, slug=slug_id, available=True)
 
     context = {
-        'product': product
+        'product': product,
     }
     return render(request, 'plankiHomePage/detail.html', context=context)
 
@@ -230,3 +245,13 @@ def detail_jettons(request, slug_id):
         'product': product
     }
     return render(request, 'plankiHomePage/detail.html', context=context)
+
+
+# Cart
+def cart(request):
+    cart = None
+
+    context = {
+        'cart': cart,
+    }
+    return render(request, 'plankiHomePage/cart.html', context=context)
